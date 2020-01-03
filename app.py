@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import facts
+import trivia
 
 def main ():
 
@@ -11,6 +12,8 @@ def main ():
             break
         elif (cmd=="f") or (cmd=="facts"):
             facts.run_facts()
+        elif (cmd=="t") or (cmd=="trivia"):
+            trivia.run_trivia()
 
 if __name__ == '__main__':
     print("Welcome to Sports App")
