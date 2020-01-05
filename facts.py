@@ -54,7 +54,45 @@ def display_results(my_year):
             list_team_names(my_year)
             continue
 
+        try:
+            allgames = Schedule(name, year=my_year)
+        except:
+            print("This is an unknown team or an unavaliable year")
+            continue
 
+        teamName = abbrevName2Name[name]
+        won = 0
+        lost = 0
+        tie = 0
+
+
+        for game in allgames:
+            if game.points_allowed is None:
+                break
+
+            oppAbbr = game.opponent_abbr.upper()
+            oppName = abbrevName2Name[oppAbbr]
+            if game.result is None:
+                result = "Not Played"
+            else:
+                result = game.result
+
+            if game.points_scored > game.points_allowed:
+                won = won + 1
+            elif game.points_scored < game.points_allowed:
+                lost = lost + 1
+            elif game.points_scored == game.points_allowed:
+                tie = tie + 1
+
+            print("%s %4s vs %24s %2d to %2d (%s)"%
+                (teamName,
+                result,
+                oppName,
+                game.points_scored,
+                game.points_allowed,
+                game.type))
+
+        print("Record: Wins: %d Loss: %d Ties: %d" % (won,lost,tie))
 
 def run_facts():
     year=""
