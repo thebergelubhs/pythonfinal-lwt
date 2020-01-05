@@ -54,7 +54,42 @@ def run_hangman_game(year):
         guesses = ' '
 
         name = player.name
-        print("name is: %s index is: %d" % (name, index))
+        # print("name is: %s index is: %d" % (name, index))
+        misses = 0
+        maxMisses = 5
+        myMisses = ''
+
+        while misses < maxMisses:
+            unknownLetters = 0
+
+            # for every character in secret_name
+            for char in name.lower():
+                # see if the character is in the players guess
+                if char in guesses:
+                    print(char, end=" ")
+                else:
+                    print("_", end=" ")
+                    unknownLetters += 1
+
+            print("(misses: %s)" % myMisses)
+
+            if unknownLetters == 0:
+                print()
+                print("Correct ... with %d misses! " % misses)
+                break
+
+            guess = input("guess a letter: ").lower()
+            guesses += guess
+
+            if guess not in name.lower():
+                myMisses += guess.lower()
+                misses = misses + 1
+                print("Wrong")
+
+            print("You have %d misses out of %d" % (misses, maxMisses))
+
+            if misses == maxMisses:
+                print("You Lose, name was: %s" % name.lower())
 
 def run_trivia():
     year=""
