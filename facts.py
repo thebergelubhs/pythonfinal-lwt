@@ -2,7 +2,7 @@
 
 from sportsreference.nfl.teams import Teams
 from sportsreference.nfl.schedule import Schedule
-
+from sportsreference.nfl.roster import Roster
 
 def list_team_names(my_year):
 
@@ -33,6 +33,7 @@ def display_teams(my_year):
          team.points_for,
          team.points_against,
          team.points_difference))
+
 
 
 def display_results(my_year):
@@ -92,13 +93,44 @@ def display_results(my_year):
                 game.points_allowed,
                 game.type))
 
-        print("Record: Wins: %d Loss: %d Ties: %d" % (won,lost,tie))
+            print("Record: Wins: %d Loss: %d Ties: %d" % (won,lost,tie))
+
+
+def display_players(my_year):
+
+    while 1:
+        name = input("Team Name (l/list/q/quit/stop): ")
+        name = name.upper()
+
+        if (name == "") or (name == "Q") or (name == "QUIT") or (name == "STOP"):
+            break
+
+        if (name == "L") or (name == "LIST"):
+            list_team_names(my_year)
+            continue
+
+        print("Getting Roster for %s, year %s" % (name, my_year))
+
+        # only get roster is not same as last one
+
+        try:
+            roster = Roster(name, year=my_year)
+            lastAbbrevName = name
+        except:
+            print("Unknown Team Name Abbreviations, use list to display Team and Abbreviations")
+            continue
+
+        for player in roster.players:
+            print("Name: %-30s" % player.name)
+
+
+
 
 def run_facts():
     year=""
 
     while 1:
-        cmd = input ("(l/list) (t/team) (r/results) (y/year) (q/quit/stop): ")
+        cmd = input ("(l/list) (t/team) (p/player) (r/results) (y/year) (q/quit/stop): ")
         cmd = cmd.lower()
 
         if  (cmd=="") or (cmd=="q") or (cmd=="quit") or (cmd=="stop"):
@@ -111,6 +143,9 @@ def run_facts():
              display_results(year)
         elif (cmd=="y") or (cmd=="year"):
             year = input("year : ")
+        elif (cmd=="p") or (cmd=="player"):
+             display_players(year)
+
 
 
 if __name__ == '__main__':
