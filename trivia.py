@@ -57,7 +57,7 @@ def run_hangman_game(year):
         # print("name is: %s index is: %d" % (name, index))
         misses = 0
         maxMisses = 5
-        myMisses = ''
+        badGuesses = ''
 
         while misses < maxMisses:
             unknownLetters = 0
@@ -71,7 +71,7 @@ def run_hangman_game(year):
                     print("_", end=" ")
                     unknownLetters += 1
 
-            print("(misses: %s)" % myMisses)
+            print("(badGuesses: %s)" % badGuesses)
 
             if unknownLetters == 0:
                 print()
@@ -82,7 +82,7 @@ def run_hangman_game(year):
             guesses += guess
 
             if guess not in name.lower():
-                myMisses += guess.lower()
+                badGuesses += guess.lower()
                 misses = misses + 1
                 print("Wrong")
 
