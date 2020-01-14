@@ -14,7 +14,7 @@ def list_team_names(my_year):
         return
 
     for team in allTeams:
-        print("%-22s %3s" % (team.name, team.abbreviation))
+        print("%-28s %3s" % (team.name, team.abbreviation))
 
 def run_hangman_game(year):
     lastAbbrevName = ""
@@ -71,7 +71,7 @@ def run_hangman_game(year):
                     print("_", end=" ")
                     unknownLetters += 1
 
-            print("(badGuesses: %s)" % badGuesses)
+            print("(bad guesses: %s)" % badGuesses)
 
             if unknownLetters == 0:
                 print()
